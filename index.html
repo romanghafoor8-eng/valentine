@@ -1,195 +1,121 @@
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>Valentine 💖</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body 
-
-margin: 0;
-
-height: 100vh;
-
-background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-font-family: Arial, sans-serif;
-
-overflow: hidden;
-
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial,sans-serif;
+overflow:hidden;
 }
 
-.card {
-
-background: white;
-
-padding: 30px;
-
-border-radius: 20px;
-
-text-align: center;
-
-box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-
-width: 90%;
-
-max-width: 350px;
-
-position: relative;
-
+/* Card */
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+width:90%;
+max-width:350px;
+position:relative;
 }
 
-h1 {
+h1{color:#ff4d6d;}
 
-color: #ff4d6d;
-
-margin-bottom: 25px;
-
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:25px;
+cursor:pointer;
 }
 
-button {
+.yes{background:#ff4d6d;color:white;}
+.no{background:#ddd;position:absolute;left:20px;top:120px;}
 
-padding: 12px 25px;
-
-font-size: 16px;
-
-border: none;
-
-border-radius: 25px;
-
-cursor: pointer;
-
+/* Floating hearts */
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:20px;
+animation:float 4s linear infinite;
 }
 
-.yes {
-
-background: #ff4d6d;
-
-color: white;
-
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
 }
-
-.no {
-
-background: #ddd;
-
-position: absolute;
-
-left: 20px;
-
-top: 120px;
-
-}
-
 </style>
-
 </head>
 
 <body>
 
-
 <div class="card">
-
-<h1>💘 yourname, will you be my Valentine? 💘</h1>
-
+<h1>💘 Anwaar, Will you be my Valentine? 💘</h1>
 <button class="yes" onclick="yesClick()">Yes ❤️</button>
-
 <button class="no" id="noBtn">No 😢</button>
-
 </div>
 
-
 <script>
+const noBtn=document.getElementById("noBtn");
+const card=document.querySelector(".card");
 
-const noBtn = document.getElementById("noBtn");
+function randomMove(){
+const maxX=card.clientWidth-noBtn.offsetWidth;
+const maxY=card.clientHeight-noBtn.offsetHeight;
 
-const card = document.querySelector(".card");
-
-
-function randomMove() {
-
-const maxX = card.clientWidth - noBtn.offsetWidth;
-
-const maxY = card.clientHeight - noBtn.offsetHeight;
-
-
-const x = Math.random() * maxX;
-
-const y = Math.random() * maxY;
-
-
-noBtn.style.left = x + "px";
-
-noBtn.style.top = y + "px";
-
+noBtn.style.left=Math.random()*maxX+"px";
+noBtn.style.top=Math.random()*maxY+"px";
 }
 
+setInterval(randomMove,700);
 
-// No button keeps moving
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
 
-setInterval(randomMove, 700);
+setTimeout(()=>heart.remove(),4000);
+}
 
-
-function yesClick() {
-
-document.body.innerHTML = `
-
+function yesClick(){
+document.body.innerHTML=`
 <div style="
-
 display:flex;
-
 flex-direction:column;
-
 justify-content:center;
-
 align-items:center;
-
 height:100vh;
-
 background:#ff9a9e;
-
 color:white;
-
 text-align:center;
-
-padding:20px;
-
-">
-
-<h1>💖 Yayyy yourname! I knew it 😍💖</h1>
-
-<img
-
-src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-
-alt="Dancing girl"
-
-style="width:250px; margin-top:20px; border-radius:20px;"
-
->
-
+padding:20px;">
+<h1>CONGRATULATIONS 💖</h1>
+<p>You are officially, proudly, and forever</p>
+<h2>The Valentine of</h2>
+<h1>Ashish Singh</h1>
+<p>
+I choose you today.<br>
+I choose you tomorrow.<br>
+And I'll keep choosing always.
+</p>
+<h3>Happy Valentine's Day ❤️</h3>
 </div>`;
 
+setInterval(createHeart,300);
 }
-
 </script>
 
-
 </body>
-
 </html>
